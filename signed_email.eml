@@ -1,0 +1,15 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com;
+ i=@example.com; q=dns/txt; s=mail; t=1793943328; h=from : to : subject
+ : date : message-id; bh=B9Y7ertZE+ssb6Ny4zqtXNlRU4N01j3SY8ewIWCeJl4=;
+ b=iwdKosDdDgRvNCWycZDuIrHN56rAffLYHGOrHdcE4E62AZgB2BBm2MQtMYWHD0XmCabUW
+ GnSSKqs9rvpHerWTvRs3NfXhL8H3BYaRcLbW6zqZY4Y+BjYx3HuoYP4eG6T6r28ht/lvi5z
+ Ei8qMFQjs69R+ZFQTNjYaPKQ8M0uDXPOcJhKO0lKhjrDM8Nd6IN6H4kJtxNBPMtLRJenVoY
+ a/vRxmK0ZOxStAP9ExNU2iX6jpMWEe+0+lQfpiWggpZ9RYSbcMtJ+ONUq1i/Dp0l7PuftYu
+ EM2YUcCCLnXoxKj269YvFLaCS38iPBFzPME81R/QfNz6td4zhksrZ7Y+jM6Q==
+From: sender@example.com
+To: receiver@example.net
+Subject: DKIM Authentication Test
+Date: Fri, 06 Nov 2026 10:00:00 +0000
+Message-ID: <test123@example.com>
+
+This is a test email for DKIM authentication.

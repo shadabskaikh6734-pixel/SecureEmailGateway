@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Secure Email Gateway</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Secure Email Authentication Gateway</h1>
+
+    <p>SPF | DKIM | DMARC Security Analyzer</p>
+
+    <form method="POST">
+
+        <label>Sending IP Address</label>
+
+        <input type="text"
+               name="ip"
+               placeholder="Example: 192.0.2.10"
+               required>
+
+        <label>Envelope Sender Email</label>
+
+        <input type="email"
+               name="sender"
+               placeholder="sender@example.com"
+               required>
+
+        <label>HELO/EHLO Domain</label>
+
+        <input type="text"
+               name="helo"
+               placeholder="mail.example.com"
+               required>
+
+        <label>Paste Complete Raw Email</label>
+
+        <textarea name="raw_email"
+                  rows="12"
+                  placeholder="Paste complete email including headers and body..."
+                  required></textarea>
+
+        <button type="submit">
+            Analyze Email
+        </button>
+
+    </form>
+
+
+    {% if results %}
+
+        {% if results.error %}
+
+            <div class="error">
+                {{ results.error }}
+            </div>
+
+        {% else %}
+
+            <h2>Authentication Results</h2>
+
+            <div class="result-card">
+
+                <h3>SPF Authentication</h3>
+
+                <p>{{ results.spf.status }}</p>
+
+                <p>{{ results.spf.message }}</p>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <h3>DKIM Authentication</h3>
+
+                <p>{{ results.dkim.status }}</p>
+
+                <p>{{ results.dkim.message }}</p>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <h3>DMARC Authentication</h3>
+
+                <p>{{ results.dmarc.status }}</p>
+
+                <p>{{ results.dmarc.message }}</p>
+
+                {% if results.dmarc.policy %}
+
+                    <p>
+                        Policy: {{ results.dmarc.policy }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <h2>Overall Security Status</h2>
+
+            <div class="overall">
+
+                {{ results.overall }}
+
+            </div>
+
+
+            <h2>Email Information</h2>
+
+            <div class="result-card">
+
+                <p>From: {{ results.headers.from }}</p>
+
+                <p>To: {{ results.headers.to }}</p>
+
+                <p>Subject: {{ results.headers.subject }}</p>
+
+                <p>Date: {{ results.headers.date }}</p>
+
+                <p>Message ID: {{ results.headers.message_id }}</p>
+
+                <p>
+                    Authentication Results:
+                    {{ results.headers.authentication_results }}
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

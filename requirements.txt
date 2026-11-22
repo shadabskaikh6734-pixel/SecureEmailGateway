@@ -1,0 +1,6 @@
+Flask
+dnspython
+pyspf
+dkimpy
+cryptography
+publicsuffix2
